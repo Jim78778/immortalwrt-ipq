@@ -87,6 +87,26 @@ define Device/buffalo_wxr-5950ax12
 endef
 TARGET_DEVICES += buffalo_wxr-5950ax12
 
+define Device/swaiot_cpe_s10
+  DEVICE_VENDOR := Swaiot
+  DEVICE_MODEL := CPE-S10
+
+  SOC := ipq8071
+  DEVICE_DTS := ipq8071-s10
+
+  IMAGE_SIZE := 240000k
+
+  KERNEL := kernel-bin | append-dtb
+  IMAGE/sysupgrade.bin := \
+    append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size
+
+  DEVICE_PACKAGES := \
+    kmod-usb3 \
+    kmod-mhi-bus \
+    qmodem
+endef
+TARGET_DEVICES += swaiot_cpe_s10
+
 define Device/cmcc_rm2-6
 	$(call Device/FitImage)
 	$(call Device/UbiFit)
